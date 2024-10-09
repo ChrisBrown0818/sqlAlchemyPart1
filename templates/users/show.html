@@ -25,5 +25,16 @@
     </form>
 </div>
 </div>
+<div>
+    <ul>
+        {% for post in user.posts %}
+        <li>
+            <a href="/posts/{{post.id}}"> {{ post.title }}</a>
+            <small>{{post.friendly_date}}</small>
+        </li>
+        {% endfor %}
+    </ul>
+</div>
+<p><a href="/users/{{ user.id }}/posts/new">Add New Post</a></p>
 
 {% endblock %}
