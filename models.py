@@ -51,8 +51,33 @@ class Post(db.Model):
         """return better formatted date"""
         return self.created_at.strftime("%a %b %-d %Y, %-I:%M %p")
 
+
+class PostTag(db.Model):
+    """tag on a post"""
+
+    __tablename__ = 'posts_tags'
+
+
+    post_id = db.Column(db.Integer, db.ForeignKey('posts.id'),  primary_key = True)
+    tag_id = db.Column(db.Integer, db.ForeignKey('tags.id'), primary_key = True)
+
+
+
+
+
+class Tag(db.Model):
+    """creating tag table, with primary key and name column"""
+
+    __tablename__ = 'tags'
+
+    id = db.Column(db.Integer, primary_key = True)
+    name = db.Column(db.Text, nullable = False, unique = True)
+
+    posts = db.relationship('Post', secondary = 'posts_tags', cascade = "all, delete",
+     backref = "tags" ) # may need to fix this
+
 def connect_db(app):
-    """This connects your app with your database, connect_db will be called in models file"""
+    """This connects your app with your database, connect_db will be called in app file"""
 
     db.app = app
     app.app_context().push()

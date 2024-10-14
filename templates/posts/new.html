@@ -22,6 +22,15 @@
     </div>
 
     <div>
+        {% for tag in tags %}
+        <div>
+            <input type="checkbox" name="tags" id="tag_{{tag.id}}" value = "{{ tag.id }}">
+            <label for="tag_{{ tag.id }}">Tag Name</label>
+        </div>
+        {% endfor %}
+    </div>
+
+    <div>
         <div>
             <a href="/users/{{ user.id }}"> Cancel </a>
             <button type = 'submit'> Add </button>
